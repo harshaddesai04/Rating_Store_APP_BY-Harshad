@@ -171,14 +171,14 @@ const Users = () => {
     const res = await axios.post("/api/getAllUsers", {
       filter: "ascending",
     });
-    console.log(res);
+    // console.log(res);
     setUserList(res.data.usersList);
   }
   useEffect(() => {
     getUsersList();
   }, []);
   useEffect(() => {
-    console.log(userList);
+    // console.log(userList);
   }, [userList]);
   useEffect(() => {
     async function filterUserData() {

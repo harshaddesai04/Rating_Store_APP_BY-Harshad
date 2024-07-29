@@ -15,7 +15,7 @@ export default async function handler(req, res) {
     // for await (const doc of dblist) {
     //   list.push(doc);
     // }
-    console.log(userInfo);
+    //console.log(userInfo);
     const { email, password } = req.body;
     try {
       const result = await axios.post(SIGNINURL, {
@@ -29,7 +29,7 @@ export default async function handler(req, res) {
     } catch (error) {
       let errormsg;
       errormsg = error?.response?.data.error.message;
-      console.log("error in backend sign in api", errormsg);
+      //console.log("error in backend sign in api", errormsg);
       res.status(200).json({ message: "error", data: errormsg });
     } finally {
       client.close();

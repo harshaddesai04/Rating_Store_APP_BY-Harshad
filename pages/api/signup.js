@@ -32,7 +32,7 @@ export default async function handler(req, res) {
     } catch (error) {
       let errormsg;
       errormsg = error?.response?.data.error.message;
-      console.log("Error in backund Signup api", errormsg);
+      //console.log("Error in backund Signup api", errormsg);
       res.status(200).json({ message: "error", data: errormsg });
     } finally {
       client.close();

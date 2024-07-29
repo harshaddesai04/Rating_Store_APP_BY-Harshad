@@ -19,7 +19,7 @@ const Dashboard = () => {
   useEffect(() => {
     async function getCounts() {
       const result = await axios.get("/api/countsForAdminDashboard");
-      console.log(result.data.counts);
+      // //console.log(result.data.counts);
       setCounts(result.data.counts);
     }
     getCounts();

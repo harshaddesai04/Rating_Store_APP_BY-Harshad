@@ -14,7 +14,7 @@ export default async function handler(req, res) {
     const submittedRatings = await database
       .collection("ratings")
       .countDocuments();
-    console.log(usersCount, storesCount, submittedRatings);
+    //console.log(usersCount, storesCount, submittedRatings);
     try {
       res.status(200).json({
         message: "success",
@@ -23,7 +23,7 @@ export default async function handler(req, res) {
     } catch (error) {
       let errormsg;
       errormsg = error?.response?.data.error.message;
-      console.log("error in backend get user list api", errormsg);
+      //console.log("error in backend get user list api", errormsg);
       res.status(200).json({ message: "error", data: errormsg });
     } finally {
       client.close();

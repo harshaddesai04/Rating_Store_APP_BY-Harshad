@@ -8,7 +8,7 @@ const StoreDisplay = () => {
       const result = await axios.post("/api/getAllStores", {
         test: "test",
       });
-      console.log(result);
+      // //console.log(result);
       setStoresList(result.data.storesList);
     }
     getStoresList();

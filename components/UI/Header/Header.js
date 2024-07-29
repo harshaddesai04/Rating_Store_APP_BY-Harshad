@@ -5,7 +5,9 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import roles from "@/utils/roles";
 import { userDataActions } from "@/redux-store/userDataSlice";
+import { usePathname } from "next/navigation";
 const Header = () => {
+  const pathname = usePathname();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.userData);
   useEffect(() => {
@@ -42,13 +44,28 @@ const Header = () => {
         <Image src={logo} alt="header-logo" width="150" height={"100"} />
       </div>
       <nav className="navigation flex gap-5">
+        {pathname != "/auth/sign-in" && pathname != "/auth/sign-up" && (
+          <Link
+            href={
+              role == roles.ADMIN
+                ? "/admin/dashboard"
+                : role == roles.USER
+                ? "/user/dashboard"
+                : "/store-owner/dashboard"
+            }
+          >
+            Dashboard
+          </Link>
+        )}
         {role === roles.ADMIN && (
           <>
             <Link href="/admin/users">Users</Link>
             <Link href="/admin/store">Store</Link>
           </>
         )}
-        <Link href={"/auth/account"}>Account</Link>
+        {pathname != "/auth/sign-in" && pathname != "/auth/sign-up" && (
+          <Link href={"/auth/account"}>Account</Link>
+        )}
       </nav>
     </header>
   );

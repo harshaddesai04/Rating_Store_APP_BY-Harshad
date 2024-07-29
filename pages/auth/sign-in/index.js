@@ -21,7 +21,7 @@ const SignIn = () => {
     email: "",
     password: "",
   });
-  console.log(name, role);
+  //console.log(name, role);
   if (name) {
     router.replace(
       role == roles.ADMIN
@@ -67,24 +67,26 @@ const SignIn = () => {
         email,
         password,
       });
-      console.log(res.data);
+      //console.log(res.data);
       const { message, data, userData } = res.data;
       if (message === "error") {
         toastMsg("error", data);
       } else {
         dispatch(userDataActions.saveUserData({ ...userData, ...data }));
         toastMsg("success", "Sign In Success !!");
-        console.log(role);
-        router.replace(
-          role == roles.ADMIN
-            ? "/admin/dashboard"
-            : role == roles.USER
-            ? "/user/dashboard"
-            : "/store-owner/dashboard"
-        );
+        //console.log(role);
+        if (role) {
+          router.replace(
+            role == roles.ADMIN
+              ? "/admin/dashboard"
+              : role == roles.USER
+              ? "/user/dashboard"
+              : "/store-owner/dashboard"
+          );
+        }
       }
     } catch (error) {
-      console.log("error in sign in:", error);
+      //console.log("error in sign in:", error);
     } finally {
       emailip.disabled = false;
       passwordip.disabled = false;

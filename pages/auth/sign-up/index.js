@@ -56,12 +56,13 @@ const SignUp = () => {
 
   function changeHandler(event, name) {
     const value = event.target.value;
-    if (name == "password") console.log(value);
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    if (name == "password")
+      //console.log(value);
+      setFormData((prev) => ({ ...prev, [name]: value }));
   }
 
   function validation(e) {
-    console.log(formData);
+    //console.log(formData);
     setEmailError("");
     setPasswordError("");
     setNameError("");
@@ -115,7 +116,7 @@ const SignUp = () => {
         address,
         role: roles.USER,
       });
-      // console.log(res.data)
+      // //console.log(res.data)
       emailip.value = "";
       passwordip.value = "";
       nameip.value = "";
