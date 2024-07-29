@@ -10,14 +10,27 @@ import toastMsg from "@/utils/DisplayToast";
 import { useDispatch, useSelector } from "react-redux";
 import { userDataActions } from "@/redux-store/userDataSlice";
 import { useRouter } from "next/router";
-//todo: show ps btn
+import roles from "@/utils/roles";
 const SignIn = () => {
+  const { user } = useSelector((state) => state.userData);
+  const { name, role } = user;
+
   const dispatch = useDispatch();
   const router = useRouter();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+  console.log(name, role);
+  if (name) {
+    router.replace(
+      role == roles.ADMIN
+        ? "/admin/dashboard"
+        : role == roles.USER
+        ? "/user/dashboard"
+        : "/store-owner/dashboard"
+    );
+  }
   const [emailerror, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
