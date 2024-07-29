@@ -59,7 +59,7 @@ const SignIn = () => {
       if (message === "error") {
         toastMsg("error", data);
       } else {
-        dispatch(userDataActions.saveUserData(userData));
+        dispatch(userDataActions.saveUserData({ ...userData, ...data }));
         toastMsg("success", "Sign In Success !!");
         router.replace("/");
       }

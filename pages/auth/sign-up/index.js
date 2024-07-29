@@ -7,6 +7,7 @@ import FormButton from "@/components/UI/FormComponents/FormButton/FormButton";
 import { useState } from "react";
 import axios from "axios";
 import toastMsg from "@/utils/DisplayToast";
+import roles from "@/utils/roles";
 
 function passwordValidation(value, setPasswordError, setIsValid) {
   if (value.length < 8) {
@@ -110,7 +111,7 @@ const SignUp = () => {
         password,
         name,
         address,
-        role: "normal-user",
+        role: roles.USER,
       });
       // console.log(res.data)
       emailip.value = "";

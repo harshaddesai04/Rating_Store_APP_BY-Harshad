@@ -10,11 +10,12 @@ export default async function handler(req, res) {
     const database = client.db("StoresRatingApp");
     const collection = database.collection("users");
     const query = { email: req.body.email };
-    const dblist = await collection.find(query);
-    const list = [];
-    for await (const doc of dblist) {
-      list.push(doc);
-    }
+    const userInfo = await collection.findOne(query);
+    // const list = [];
+    // for await (const doc of dblist) {
+    //   list.push(doc);
+    // }
+    console.log(userInfo);
     const { email, password } = req.body;
     try {
       const result = await axios.post(SIGNINURL, {
@@ -24,12 +25,14 @@ export default async function handler(req, res) {
       });
       res
         .status(200)
-        .json({ message: "success", data: result.data, userData: list[0] });
+        .json({ message: "success", data: result.data, userData: userInfo });
     } catch (error) {
       let errormsg;
       errormsg = error?.response?.data.error.message;
       console.log("error in backend sign in api", errormsg);
       res.status(200).json({ message: "error", data: errormsg });
+    } finally {
+      client.close();
     }
   }
 }

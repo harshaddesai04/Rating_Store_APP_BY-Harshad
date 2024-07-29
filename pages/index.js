@@ -11,3 +11,12 @@ export default function Home() {
     </main>
   );
 }
+/*
+Admin:
+admin@a.com
+Admin@123
+
+Store:
+storeowner@a.com
+Store@123
+*/
