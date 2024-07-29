@@ -30,7 +30,10 @@ const Dashboard = () => {
         {storeList.map((store) => {
           const { name, email, store_name, overall_rating, address } = store;
           return (
-            <div className="bg-white shadow-md border w-fit h-fit p-7 rounded-xl flex flex-col gap-3 max-w-[300px] max-h-[500px]">
+            <div
+              key={name}
+              className="bg-white shadow-md border w-fit h-fit p-7 rounded-xl flex flex-col gap-3 max-w-[300px] max-h-[500px]"
+            >
               <div className="image">
                 <Image
                   className="rounded-xl"

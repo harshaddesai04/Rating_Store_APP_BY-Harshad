@@ -47,7 +47,7 @@ const Dashboard = () => {
           {usersList.map((user) => {
             console.log(user);
             return (
-              <div className="">
+              <div key={user._id} className="">
                 <div> {user.user_name}</div>
                 <div>
                   <Rating
