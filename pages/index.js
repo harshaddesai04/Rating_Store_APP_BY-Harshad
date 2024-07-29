@@ -4,10 +4,10 @@ export default function Home() {
   const { name, role, email, address } = user;
   return (
     <main>
-      <p>name:{name}</p>
+      {/* <p>name:{name}</p>
       <p>role:{role}</p>
       <p>email:{email}</p>
-      <p>address:{address}</p>
+      <p>address:{address}</p> */}
     </main>
   );
 }
