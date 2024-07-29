@@ -74,7 +74,14 @@ const SignIn = () => {
       } else {
         dispatch(userDataActions.saveUserData({ ...userData, ...data }));
         toastMsg("success", "Sign In Success !!");
-        router.replace("/");
+        console.log(role);
+        router.replace(
+          role == roles.ADMIN
+            ? "/admin/dashboard"
+            : role == roles.USER
+            ? "/user/dashboard"
+            : "/store-owner/dashboard"
+        );
       }
     } catch (error) {
       console.log("error in sign in:", error);

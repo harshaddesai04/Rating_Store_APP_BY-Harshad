@@ -8,6 +8,7 @@ import { useState } from "react";
 import axios from "axios";
 import toastMsg from "@/utils/DisplayToast";
 import roles from "@/utils/roles";
+import { useRouter } from "next/router";
 
 function passwordValidation(value, setPasswordError, setIsValid) {
   if (value.length < 8) {
@@ -40,6 +41,7 @@ function passwordValidation(value, setPasswordError, setIsValid) {
 }
 
 const SignUp = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -124,7 +126,7 @@ const SignUp = () => {
       } else {
         // dispatch(authActions.saveUserData({ message, ...data }));
         toastMsg("success", "Account created Successfully !!");
-        // router.replace("/");
+        router.replace("/auth/sign-in");
       }
     }
     emailip.disabled = false;
