@@ -28,7 +28,7 @@ const Dashboard = () => {
     if (email) getStoreStats();
   }, []);
   return (
-    <div className="min-h-screen border flex gap-5 justify-center items-center">
+    <div className="min-h-[inherit] border flex gap-5 justify-center items-center">
       <div className="p-5 shadow-xl rounded-lg text-center">
         <div className="text-3xl">Overall Rating</div>
         <div>

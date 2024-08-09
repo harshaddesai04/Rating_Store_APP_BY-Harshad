@@ -93,7 +93,7 @@ const SignIn = () => {
     }
   }
   return (
-    <div className="border h-screen flex justify-center items-center">
+    <div className="min-h-[inherit] flex justify-center items-center">
       <FormPage>
         <FormMessage
           header="Sign in to your account"

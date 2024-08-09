@@ -38,7 +38,7 @@ const Header = () => {
   return (
     <header
       // style={{ top: `${top}rem` }}
-      className="bg-white h-[56px] py-2 px-5 flex items-center justify-between border-b w-full transition-[top] duration-500 shadow-xl"
+      className="bg-white h-14 py-2 px-5 flex items-center justify-between border-b w-full transition-[top] duration-500 shadow-xl"
     >
       <div className="logo">
         <Image src={logo} alt="header-logo" width="150" height={"100"} />

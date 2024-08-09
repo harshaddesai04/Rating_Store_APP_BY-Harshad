@@ -25,7 +25,7 @@ const Dashboard = () => {
     getCounts();
   }, []);
   return (
-    <div className=" min-h-screen flex flex-col md:flex-row justify-center items-center gap-7 p-7">
+    <div className=" min-h-[inherit] flex flex-col md:flex-row justify-center items-center gap-7 p-7">
       <DashboardCard heading={"Total Users"} number={counts.usersCount} />
       <DashboardCard heading={"Total Stores"} number={counts.storesCount} />
       <DashboardCard

@@ -11,11 +11,6 @@ export default async function handler(req, res) {
     const collection = database.collection("users");
     const query = { email: req.body.email };
     const userInfo = await collection.findOne(query);
-    // const list = [];
-    // for await (const doc of dblist) {
-    //   list.push(doc);
-    // }
-    //console.log(userInfo);
     const { email, password } = req.body;
     try {
       const result = await axios.post(SIGNINURL, {

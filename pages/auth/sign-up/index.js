@@ -137,7 +137,7 @@ const SignUp = () => {
   }
 
   return (
-    <div className="border min-h-screen flex justify-center items-center">
+    <div className="border min-h-[inherit] flex justify-center items-center">
       <FormPage>
         <FormMessage
           header="Create a new account"

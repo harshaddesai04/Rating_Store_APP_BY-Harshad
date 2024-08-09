@@ -24,9 +24,9 @@ const Dashboard = () => {
     getStoresList();
   }, []);
   return (
-    <div className=" min-h-screen p-5">
+    <div className=" min-h-[inherit] p-5 flex border justify-center items-start ">
       {popupInfo.name && <Popup {...popupInfo} close={setPopupInfo} />}
-      <div className=" grid grid-cols-1 gap-2 place-items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <div className=" grid grid-cols-1 gap-2 place-items-center sm:grid-cols-2 md:grid-cols-3 max-w-6xl ">
         {storeList.map((store) => {
           const { name, email, store_name, overall_rating, address } = store;
           return (
