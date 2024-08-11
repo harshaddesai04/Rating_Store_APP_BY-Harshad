@@ -36,7 +36,6 @@ const Dashboard = () => {
   useEffect(() => {
     const id = setTimeout(() => {
       if (search) {
-        console.log(search);
         let temp = storeList.filter((store) => {
           return (
             store.name.toLowerCase().includes(search) ||
@@ -66,11 +65,11 @@ const Dashboard = () => {
         />
       </div>
       <div className="  p-5 flex border justify-center items-start ">
-        {/* {isLoading && (
+        {isLoading && (
           <div className="fixed top-0 left-0 w-screen h-screen grid place-items-center z-50 bg-black/80">
             <Loader color="white" size="3em" />
           </div>
-        )} */}
+        )}
         {popupInfo.name && <Popup {...popupInfo} close={setPopupInfo} />}
         <div className=" grid grid-cols-1 gap-2 place-items-center sm:grid-cols-2 md:grid-cols-3 max-w-6xl ">
           {filterstoreList.map((store) => {
