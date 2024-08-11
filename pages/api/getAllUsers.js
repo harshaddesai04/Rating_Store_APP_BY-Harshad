@@ -18,12 +18,10 @@ export default async function handler(req, res) {
         .find()
         .sort({ [arrangeBy]: sortBy == "ascending" ? 1 : -1 });
     }
-    // //console.log("dblist", dblist);
     const list = [];
     for await (const doc of dblist) {
       list.push(doc);
     }
-    // //console.log("list", list);
     try {
       res.status(200).json({ message: "success", usersList: list });
     } catch (error) {

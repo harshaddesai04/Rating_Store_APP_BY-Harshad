@@ -22,7 +22,6 @@ const Account = () => {
     setErrorMessage("");
     e.preventDefault();
     const value = e.target.password.value;
-    //console.log(value);
     if (value.length < 8) {
       setErrorMessage("Password should have more than 8 characters");
       return;
@@ -56,7 +55,6 @@ const Account = () => {
       newPassword,
       idToken,
     });
-    console.log(res);
     if (res.data.message == "error") {
       toastMsg(res.data.message, res.data.data);
     } else {

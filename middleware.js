@@ -14,7 +14,6 @@ export function middleware(request) {
               "/admin/dashboard",
               request.nextUrl.origin
             );
-            console.log(absoluteURL);
             return NextResponse.redirect(absoluteURL.toString());
           }
         }
@@ -25,7 +24,6 @@ export function middleware(request) {
             "/user/dashboard",
             request.nextUrl.origin
           );
-          console.log(absoluteURL.toString());
           return NextResponse.redirect(absoluteURL.toString());
         }
         break;
@@ -35,7 +33,6 @@ export function middleware(request) {
             "/store-owner/dashboard",
             request.nextUrl.origin
           );
-          console.log(absoluteURL.toString());
           return NextResponse.redirect(absoluteURL.toString());
         }
         break;

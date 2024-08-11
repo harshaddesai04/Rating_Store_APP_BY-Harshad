@@ -15,7 +15,6 @@ const Popup = ({ name, store_name, email, address, overall_rating, close }) => {
   const [rateDisabled, setRateDisabled] = useState(true);
   const [rating, setRating] = useState(0);
   const { user } = useSelector((state) => state.userData);
-  //console.log(user);
   const {
     name: user_name,
     email: user_email,
@@ -29,7 +28,6 @@ const Popup = ({ name, store_name, email, address, overall_rating, close }) => {
         user_name,
         name,
       });
-      //console.log(result);
       if (result.data.ratingInfo) {
         setRating(result.data.ratingInfo.rating);
       }
@@ -89,7 +87,6 @@ const Popup = ({ name, store_name, email, address, overall_rating, close }) => {
                 onChange={(rating) => {
                   setRateDisabled(true);
                   async function submitRating() {
-                    //console.log(rating);
                     try {
                       const result = await axios.post("/api/submitRating", {
                         rating,
@@ -97,7 +94,6 @@ const Popup = ({ name, store_name, email, address, overall_rating, close }) => {
                         user_name,
                         name,
                       });
-                      //console.log(result);
                       setRating(rating);
                     } catch (error) {
                       //console.log(error);

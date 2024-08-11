@@ -1,4 +1,3 @@
-import AuthHOC from "@/pages/AuthHOC";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
@@ -20,7 +19,6 @@ const Dashboard = () => {
   useEffect(() => {
     async function getCounts() {
       const result = await axios.get("/api/countsForAdminDashboard");
-      // //console.log(result.data.counts);
       setCounts(result.data.counts);
     }
     getCounts();

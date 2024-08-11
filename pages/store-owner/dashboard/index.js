@@ -12,7 +12,6 @@ const Dashboard = () => {
   const [overallRating, setOverallRating] = useState(0);
   const [usersList, setUsersList] = useState([]);
   const { user } = useSelector((state) => state.userData);
-  //console.log(user);
   const { name, email } = user;
 
   useEffect(() => {
@@ -21,7 +20,6 @@ const Dashboard = () => {
         name,
         email,
       });
-      //console.log("result", result.data);
       setOverallRating(result.data.rating);
       setUsersList(result.data.userList);
     }
@@ -45,7 +43,6 @@ const Dashboard = () => {
         <div className="text-3xl mb-5">User Ratings</div>
         <div className="flex flex-col gap-5">
           {usersList.map((user) => {
-            //console.log(user);
             return (
               <div
                 key={user._id}

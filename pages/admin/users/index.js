@@ -63,12 +63,10 @@ const Users = () => {
 
   function changeHandler(event, name) {
     const value = event.target.value;
-    if (name == "password") console.log(value);
     setFormData((prev) => ({ ...prev, [name]: value }));
   }
 
   function validation(e) {
-    // console.log(formData);
     setEmailError("");
     setPasswordError("");
     setNameError("");
@@ -161,7 +159,6 @@ const Users = () => {
     const res = await axios.post("/api/getAllUsers", {
       filter: "ascending",
     });
-    // console.log(res);
     setUserList(res.data.usersList);
   }
   useEffect(() => {
@@ -174,7 +171,6 @@ const Users = () => {
       const result = await axios.post("/api/getAllUsers", {
         ...filter,
       });
-      console.log(result);
       setUserList(result.data.usersList);
       setIsLoading(false);
     }

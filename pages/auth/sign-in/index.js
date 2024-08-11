@@ -21,7 +21,6 @@ const SignIn = () => {
     email: "",
     password: "",
   });
-  //console.log(name, role);
   if (name) {
     router.replace(
       role == roles.ADMIN
@@ -67,14 +66,12 @@ const SignIn = () => {
         email,
         password,
       });
-      //console.log(res.data);
       const { message, data, userData } = res.data;
       if (message === "error") {
         toastMsg("error", data);
       } else {
         dispatch(userDataActions.saveUserData({ ...userData, ...data }));
         toastMsg("success", "Sign In Success !!");
-        //console.log(role);
         if (role) {
           router.replace(
             role == roles.ADMIN

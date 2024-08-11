@@ -3,7 +3,6 @@ import { MongoClient } from "mongodb";
 const uri = process.env.MONGODB_URI;
 
 export default async function handler(req, res) {
-  //console.log("body", req.body);
   const { store_name, user_name, name, rating } = req.body;
   const client = new MongoClient(uri);
   if (req.method === "POST") {
@@ -12,7 +11,6 @@ export default async function handler(req, res) {
     let query = { user_name, store_name, name };
 
     let ratingInfo = await collection.findOne(query);
-    //console.log(ratingInfo);
     try {
       let result;
       if (ratingInfo != null) {
@@ -27,7 +25,6 @@ export default async function handler(req, res) {
           name,
           rating,
         });
-        //console.log(result);
       }
       let calculateAverage = await collection
         .aggregate([
@@ -41,7 +38,6 @@ export default async function handler(req, res) {
         ])
         .toArray();
       const overall_rating = calculateAverage[0].averageRating;
-      //   //console.log(overall_rating);
       const updateAverage = await database
         .collection("users")
         .updateOne({ store_name, name }, { $set: { overall_rating } });

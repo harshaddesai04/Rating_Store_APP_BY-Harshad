@@ -4,7 +4,6 @@ const initialState = { user: {} };
 try {
   const userdetails = localStorage.setItem("user");
   initialState.user(JSON.parse(userdetails));
-  console.log(initialState);
 } catch {}
 const userSlice = createSlice({
   name: "userData",

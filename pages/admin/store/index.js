@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import roles from "@/utils/roles";
-import AuthHOC from "@/pages/AuthHOC";
 const StoreDisplay = () => {
   const select = "border rounded-lg p-3";
   const select_container = "flex gap-3 items-center justify-between";
@@ -28,7 +27,6 @@ const StoreDisplay = () => {
       const result = await axios.post("/api/getAllStores", {
         ...filter,
       });
-      console.log(result);
       setStoresList(result.data.storesList);
     }
     filterStoresList();

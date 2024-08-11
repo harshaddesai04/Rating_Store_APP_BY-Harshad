@@ -56,13 +56,10 @@ const SignUp = () => {
 
   function changeHandler(event, name) {
     const value = event.target.value;
-    if (name == "password")
-      //console.log(value);
-      setFormData((prev) => ({ ...prev, [name]: value }));
+    if (name == "password") setFormData((prev) => ({ ...prev, [name]: value }));
   }
 
   function validation(e) {
-    //console.log(formData);
     setEmailError("");
     setPasswordError("");
     setNameError("");
@@ -116,7 +113,6 @@ const SignUp = () => {
         address,
         role: roles.USER,
       });
-      // //console.log(res.data)
       emailip.value = "";
       passwordip.value = "";
       nameip.value = "";
@@ -125,7 +121,6 @@ const SignUp = () => {
       if (message === "error") {
         toastMsg("error", data);
       } else {
-        // dispatch(authActions.saveUserData({ message, ...data }));
         toastMsg("success", "Account created Successfully !!");
         router.replace("/auth/sign-in");
       }
