@@ -28,7 +28,7 @@ registered on this platform
 
 <!-- [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
 
-This project is submission to coding-task given by Roxiler systems
+This project was done according to the requirements in the challenge
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -47,7 +47,7 @@ This project is submission to coding-task given by Roxiler systems
 
 <!-- GETTING STARTED -->
 
-## Screenshots
+<!-- ## Screenshots
 
 ### Admin-Dashboard
 
@@ -67,7 +67,91 @@ This project is submission to coding-task given by Roxiler systems
 
 ### Store Owner Dashboard
 
-<img src="readme-assets/store-owner-dashboard.png" alt="Logo" width="500" height="300">
+<img src="readme-assets/store-owner-dashboard.png" alt="Logo" width="500" height="300"> -->
+
+## Coding Challenge
+
+### Tech Stack
+
+- **Backend:** Any NodeJs-based backend framework
+- **Database:** Any non-relational/relational database
+- **Frontend:** Any framework of React
+
+### Requirement
+
+We require a web application enabling users to submit a rating of any store registered on this platform. The rating will be between 1 to 5.
+
+We will need a single login for all types of users, and based on the user’s role, they will see different functionalities on the page after login. For normal users, provide a signup page to register on the platform.
+
+### User Personas (Roles):
+
+- **System Admin**
+- **Normal User**
+- **Store Owner**
+
+### System Admin Functionalities:
+
+- Admin can add stores, normal users, and admin users in the system
+- Show one dashboard page to the admin user with the following details:
+  - Total Users
+  - Total Stores
+  - Total Users Submitted Rating
+- The user addition form will have the following fields:
+  - Name
+  - Email
+  - Password
+  - Address
+- During the store listing display, the following fields:
+  - Name, Email, Address, Rating
+- During the normal users and admin users listing display, the following fields:
+  - Name, Email, Address, Role
+- All the listings should have an option to apply a filter on these fields:
+  - Name, email, address, and Role
+- Allow an option for Admin users to see the following details of all types of users:
+  - Name, email, address, and role
+  - Rating - in case the user type is Store Owner
+- Provide an option to logout from the system
+
+### Normal User Functionalities:
+
+- The user should be able to log in and sign up to the platform
+- The signup form will have the following fields:
+  - Name, Email, Address, Password
+- Provide an option for the user to change the password after login
+- The user should be able to see the list of all registered stores
+- Allow users to search the store based on name and address
+- Store listing will have to list the following details in the table:
+  - Name
+  - Address
+  - Overall ratings
+  - My submitted rating
+  - Option to submit my rating
+  - Option to modify my submitted rating
+- Allow users to submit ratings between 1 to 5 to individual stores
+- Provide an option to logout from the system
+
+### Store Owner User Functionalities:
+
+- The user should be able to log in to the platform
+- After login, the user should be able to change the password
+- On the dashboard, they should be able to see the list of users who have submitted the rating to their store
+- On the dashboard, display the average total submitted ratings to their store
+- Provide an option to logout from the system
+
+### Validations
+
+Validations should be present on all forms:
+
+- The name length should be 60 characters max and 20 characters min
+- The Address length should be 400 characters max
+- The password length max 16 and 8 min, it should have at least 1 upper, and 1 special character in it.
+- Email address validation should be there in the email field.
+
+### Note:
+
+- All the tables should have sorting (ascending/descending) functionality on important fields like name, email, etc.
+- Follow best practices on both the frontend and backend sides.
+- Best practices need to be followed on table schema design on the database side.
 
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [Next-url]: https://nextjs.org/
