@@ -5,14 +5,17 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import roles from "@/utils/roles";
 import { userDataActions } from "@/redux-store/userDataSlice";
-import { usePathname } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
+import { useRouter } from "next/router";
 const Header = () => {
+  const router = useRouter();
   const pathname = usePathname();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.userData);
   useEffect(() => {
     const local_user = JSON.parse(localStorage.getItem("user"));
     dispatch(userDataActions.saveUserData({ ...local_user }));
+    document.cookie = "username=John Doe";
   }, []);
   const role = user.role;
   // const role = roles.ADMIN;
@@ -35,6 +38,7 @@ const Header = () => {
       window?.removeEventListener("scroll", handleScroll);
     };
   }, [prevScrollPos]);
+
   return (
     <header
       // style={{ top: `${top}rem` }}
@@ -61,6 +65,7 @@ const Header = () => {
           <>
             <Link href="/admin/users">Users</Link>
             <Link href="/admin/store">Store</Link>
+            <Link href="/user/dashboard">Rate a store</Link>
           </>
         )}
         {pathname != "/auth/sign-in" && pathname != "/auth/sign-up" && (

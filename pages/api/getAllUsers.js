@@ -1,9 +1,5 @@
-import axios from "axios";
-import googleAuthURIs from "@/utils/googleAuthURIs";
 import { MongoClient } from "mongodb";
 const uri = process.env.MONGODB_URI;
-// const googleapikey = process.env.GOOGLE_API_KEY;
-// const SIGNINURL = `${googleAuthURIs.SignInUrl}${googleapikey}`;
 
 export default async function handler(req, res) {
   const client = new MongoClient(uri);

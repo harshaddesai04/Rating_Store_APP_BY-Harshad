@@ -8,11 +8,12 @@ const Input = ({
   value,
   errorMessage,
   as = "input",
+  className,
 }) => {
   const [inputType, setinputType] = useState("password");
   const isPassword = type === "password";
   return (
-    <div className="relative">
+    <div className={`${className ? className : "relative"}`}>
       <label htmlFor={id} className={`block text-sm font-medium text-gray-700`}>
         {label}
         {as != "textarea" ? (

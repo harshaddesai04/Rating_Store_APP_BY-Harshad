@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import toastMsg from "@/utils/DisplayToast";
 import roles from "@/utils/roles";
-import ColumnResizer from "react-table-column-resizer";
+import Loader from "@/components/UI/Icons/Loader";
 const menu = {
   ADD_USER: "add-user",
   VIEW_USER: "view-user",
@@ -44,7 +44,7 @@ function passwordValidation(value, setPasswordError, setIsValid) {
 }
 
 const Users = () => {
-  const [role, setRole] = useState(roles.ADMIN);
+  const [isLoading, setIsLoading] = useState(false);
   const [display, setDisplay] = useState("add-user");
   const [formData, setFormData] = useState({
     email: "",
@@ -54,7 +54,7 @@ const Users = () => {
     role: roles.ADMIN,
     store_name: "",
   });
-  const [isValid, setIsValid] = useState();
+  const [isValid, setIsValid] = useState(true);
   const [emailerror, setEmailError] = useState("");
   const [nameError, setNameError] = useState("");
   const [addressError, setAddressError] = useState("");
@@ -75,12 +75,7 @@ const Users = () => {
     setAddressError("");
 
     e.preventDefault();
-    // console.log(e.target);
 
-    // const emailip = e.target["signup-email"];
-    // const passwordip = e.target["signup-password"];
-    // const nameip = e.target["signup-name"];
-    // const addressip = e.target["signup-address"];
     const { email, password, name, address } = formData;
 
     if (name.length < 20) {
@@ -91,9 +86,16 @@ const Users = () => {
       setNameError("Name should be 60 characters or below");
       return;
     }
+    if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+      setEmailError("Invalid Email");
+      return;
+    }
 
+    passwordValidation(password, setPasswordError, setIsValid);
+    if (!isValid) return;
     if (address.length < 10) {
       setAddressError("Address should be more than 10 characters");
+      return;
     }
 
     if (address.length > 400) {
@@ -101,20 +103,9 @@ const Users = () => {
       return;
     }
 
-    if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
-      setEmailError("Invalid Email");
-      return;
-    }
-
-    passwordValidation(password, setPasswordError, setIsValid);
-
     if (isValid) requestSignUp(e);
   }
   async function requestSignUp(e) {
-    // emailip.disabled = true;
-    // passwordip.disabled = true;
-    // nameip.disabled = true;
-    // addressip.disabled = true;
     let inputs = e.target;
     for (let i = 0; i < inputs.length; i++) {
       inputs[i].disabled = true;
@@ -130,14 +121,17 @@ const Users = () => {
         store_name,
         overall_rating: 0,
       });
-      // console.log(res.data)
-      //   emailip.value = "";
-      //   passwordip.value = "";
-      //   nameip.value = "";
-      //   addressip.value = "";
-      for (let i = 0; i < inputs.length; i++) {
-        inputs[i].value = "";
-      }
+      setFormData({
+        email: "",
+        password: "",
+        name: "",
+        address: "",
+        role: roles.ADMIN,
+        store_name: "",
+      });
+      // for (let i = 0; i < inputs.length; i++) {
+      //   inputs[i].value = "";
+      // }
       const { message, data } = res.data;
       if (message === "error") {
         toastMsg("error", data);
@@ -147,15 +141,11 @@ const Users = () => {
         // router.replace("/");
       }
     }
-    // emailip.disabled = false;
-    // passwordip.disabled = false;
-    // nameip.disabled = false;
-    // addressip.disabled = false;
     for (let i = 0; i < inputs.length; i++) {
       inputs[i].disabled = false;
     }
   }
-  ///////////////////////start
+  /////////////////////// View Users Tab
   const [filter, setFilter] = useState({
     "arrange-by": "name",
     "sort-by": "ascending",
@@ -177,34 +167,38 @@ const Users = () => {
   useEffect(() => {
     getUsersList();
   }, []);
+
   useEffect(() => {
-    // console.log(userList);
-  }, [userList]);
-  useEffect(() => {
+    setIsLoading(true);
     async function filterUserData() {
       const result = await axios.post("/api/getAllUsers", {
         ...filter,
       });
       console.log(result);
       setUserList(result.data.usersList);
+      setIsLoading(false);
     }
     filterUserData();
   }, [filter]);
-  ///////////////////////////end
+  ///////////////////////////
   return (
     <div className="relative w-full">
       <nav className="flex  top-0 left-0 w-full bg-white justify-around items-center ">
         <button
-          className={`p-5 w-full h-full hover:bg-gray-100 ${
-            display == menu.ADD_USER && "bg-gray-100"
+          className={`p-5 w-full h-full hover:bg-gray-100 border-b-2 ${
+            display == menu.ADD_USER
+              ? "border-b-blue-500 bg-gray-100"
+              : "border-b-gray-500"
           }`}
           onClick={() => setDisplay(menu.ADD_USER)}
         >
           Add User
         </button>
         <button
-          className={`p-5 w-full h-full hover:bg-gray-100 ${
-            display == menu.VIEW_USER && "bg-gray-100"
+          className={`p-5 w-full h-full hover:bg-gray-100 border-b-2 ${
+            display == menu.VIEW_USER
+              ? "border-b-blue-500 bg-gray-100"
+              : "border-b-gray-500"
           }`}
           onClick={() => setDisplay(menu.VIEW_USER)}
         >
@@ -282,7 +276,7 @@ const Users = () => {
           </div>
         )}
         {display == menu.VIEW_USER && (
-          <div>
+          <div className="relative">
             <div className="filter p-4 md:h-20 border flex flex-col items-center gap-5 md:gap-0 md:flex-row md:justify-around md:items-center">
               <div className={`${select_container}`}>
                 <label htmlFor="arrange-by">Arrange By</label>
@@ -294,7 +288,7 @@ const Users = () => {
                 >
                   <option value={"name"}>Name</option>
                   <option value={"email"}>Email</option>
-                  <option value={"Address"}>Address</option>
+                  <option value={"address"}>Address</option>
                 </select>
               </div>
               <div className={select_container}>
@@ -335,36 +329,41 @@ const Users = () => {
               </div>
             </div>
             <div className="overflow-auto">
-              <table>
-                <thead className="">
-                  <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Role</th>
-                    <th>Address</th>
-                    <th>E-mail</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {userList.length > 0 &&
-                    userList.map((user, index) => (
-                      <tr key={user._id}>
-                        <td>{index + 1}</td>
-                        <td>{user.name}</td>
-                        {console.log(user.role)}
-                        <td>
-                          {user.role == roles.ADMIN
-                            ? "System Admin"
-                            : user.role == roles.STOREOW
-                            ? "Store Owner"
-                            : "Normal User"}
-                        </td>
-                        <td>{user.address}</td>
-                        <td>{user.email}</td>
-                      </tr>
-                    ))}
-                </tbody>
-              </table>
+              {isLoading ? (
+                <div className=" top-0 left-0 bg-black/50 h-20 grid place-items-center">
+                  <Loader size="3em" color="white" />
+                </div>
+              ) : (
+                <table>
+                  <thead className="">
+                    <tr>
+                      <th>#</th>
+                      <th>Name</th>
+                      <th>Role</th>
+                      <th>Address</th>
+                      <th>E-mail</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {userList.length > 0 &&
+                      userList.map((user, index) => (
+                        <tr key={user._id}>
+                          <td>{index + 1}</td>
+                          <td>{user.name}</td>
+                          <td>
+                            {user.role == roles.ADMIN
+                              ? "System Admin"
+                              : user.role == roles.STOREOW
+                              ? "Store Owner"
+                              : "Normal User"}
+                          </td>
+                          <td>{user.address}</td>
+                          <td>{user.email}</td>
+                        </tr>
+                      ))}
+                  </tbody>
+                </table>
+              )}
             </div>
           </div>
         )}

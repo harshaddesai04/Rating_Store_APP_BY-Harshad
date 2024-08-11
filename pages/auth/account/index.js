@@ -1,5 +1,5 @@
-import Input from "@/components/UI/FormComponents/Input/Input";
 import { userDataActions } from "@/redux-store/userDataSlice";
+import toastMsg from "@/utils/DisplayToast";
 import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
@@ -14,6 +14,10 @@ const Account = () => {
   const { name, email, address, role } = user;
   const [changePassword, setChangePassword] = useState(false);
   const { idToken } = user;
+  function logout() {
+    dispatch(userDataActions.logout());
+    router.replace("/auth/sign-in");
+  }
   function passwordValidation(e, setErrorMessage) {
     setErrorMessage("");
     e.preventDefault();
@@ -52,7 +56,13 @@ const Account = () => {
       newPassword,
       idToken,
     });
-    //console.log(res);
+    console.log(res);
+    if (res.data.message == "error") {
+      toastMsg(res.data.message, res.data.data);
+    } else {
+      toastMsg("success", "Password was changed successfully");
+      logout();
+    }
   }
   return (
     <section className="min-h-[inherit] flex justify-center items-center">
@@ -134,13 +144,10 @@ const Account = () => {
             onClick={() => setChangePassword(!changePassword)}
             className="bg-black text-white hover:bg-white hover:text-black transition-colors duration-250 p-1 md:px-5 md:py-5 rounded-lg border border-transparent hover:border-black"
           >
-            Change Password
+            {changePassword ? "Cancel" : "Change Password"}
           </button>
           <button
-            onClick={() => {
-              dispatch(userDataActions.logout());
-              router.replace("/auth/sign-in");
-            }}
+            onClick={() => logout()}
             className="bg-black text-white hover:bg-white hover:text-black transition-colors duration-250 p-1 md:px-5 md:py-5 rounded-lg border border-transparent hover:border-black"
           >
             Logout

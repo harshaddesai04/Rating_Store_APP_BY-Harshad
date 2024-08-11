@@ -1,3 +1,4 @@
+import AuthHOC from "@/pages/AuthHOC";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
@@ -23,9 +24,16 @@ const Dashboard = () => {
       setCounts(result.data.counts);
     }
     getCounts();
+
+    const intervalId = setInterval(() => {
+      getCounts();
+    }, 20000);
+    return () => {
+      clearInterval(intervalId);
+    };
   }, []);
   return (
-    <div className=" min-h-[inherit] flex flex-col md:flex-row justify-center items-center gap-7 p-7">
+    <div className=" min-h-[inherit] flex flex-col lg:flex-row justify-center items-center gap-7 p-7 text-center">
       <DashboardCard heading={"Total Users"} number={counts.usersCount} />
       <DashboardCard heading={"Total Stores"} number={counts.storesCount} />
       <DashboardCard

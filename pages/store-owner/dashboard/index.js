@@ -28,8 +28,8 @@ const Dashboard = () => {
     if (email) getStoreStats();
   }, []);
   return (
-    <div className="min-h-[inherit] border flex gap-5 justify-center items-center">
-      <div className="p-5 shadow-xl rounded-lg text-center">
+    <div className="min-h-[inherit] border flex flex-col md:flex-row gap-5 justify-center items-center">
+      <div className="p-5 shadow-xl rounded-lg text-center min-w-80 min-h-80 flex flex-col items-center justify-center">
         <div className="text-3xl">Overall Rating</div>
         <div>
           <Rating
@@ -41,14 +41,17 @@ const Dashboard = () => {
           />
         </div>
       </div>
-      <div className="p-5 shadow-xl rounded-lg text-center">
-        <div className="text-3xl">User Ratings</div>
+      <div className="p-5 shadow-xl rounded-lg text-center min-w-80 min-h-80">
+        <div className="text-3xl mb-5">User Ratings</div>
         <div className="flex flex-col gap-5">
           {usersList.map((user) => {
             //console.log(user);
             return (
-              <div key={user._id} className="">
-                <div> {user.user_name}</div>
+              <div
+                key={user._id}
+                className="flex flex-col justify-center items-center gap-1 border p-1 rounded-lg"
+              >
+                <div className="font-semibold"> {user.user_name}</div>
                 <div>
                   <Rating
                     style={{ maxWidth: 150 }}
