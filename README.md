@@ -14,7 +14,7 @@ registered on this platform
     <!-- <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
     <br /> -->
     <br />
-    <a href="https://roxiler-systems-assignment-phi.vercel.app/auth/sign-in">View Demo</a>
+    <a href="https://store-rating-app.vercel.app/">View Demo</a>
     <!-- ·
     <a href="https://github.com/github_username/repo_name/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
     ·
@@ -28,7 +28,7 @@ registered on this platform
 
 <!-- [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
 
-This project was done according to the requirements in the challenge
+This project was done according to the requirements in the challenge given in the coding challenge section.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
