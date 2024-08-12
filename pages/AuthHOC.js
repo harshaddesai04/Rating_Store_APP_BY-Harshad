@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import roles from "@/utils/roles";
 
 const AuthHOC = (Component) => {
-  return function checkRole(props) {
+  return function CheckRole(props) {
     const pathname = usePathname();
     const router = useRouter();
     const { user } = useSelector((state) => state.userData);
