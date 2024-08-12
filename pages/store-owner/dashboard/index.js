@@ -26,7 +26,8 @@ const Dashboard = () => {
     if (email) getStoreStats();
   }, []);
   return (
-    <div className="min-h-[inherit] border flex flex-col md:flex-row gap-5 justify-center items-center">
+    <div className="min-h-[inherit] grid grid-cols-1 md:grid-cols-2 border  gap-5 p-7">
+      {/* <div className="min-h-[inherit] border flex flex-col md:flex-row gap-5 justify-center items-center"> */}
       <div className="p-5 shadow-xl rounded-lg text-center min-w-80 min-h-80 flex flex-col items-center justify-center">
         <div className="text-3xl">Overall Rating</div>
         <div>
@@ -41,12 +42,12 @@ const Dashboard = () => {
       </div>
       <div className="p-5 shadow-xl rounded-lg text-center min-w-80 min-h-80">
         <div className="text-3xl mb-5">User Ratings</div>
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-5 ">
           {usersList.map((user) => {
             return (
               <div
                 key={user._id}
-                className="flex flex-col justify-center items-center gap-1 border p-1 rounded-lg"
+                className="flex flex-col justify-center items-center gap-1 border p-1 rounded-lg  "
               >
                 <div className="font-semibold"> {user.user_name}</div>
                 <div>
