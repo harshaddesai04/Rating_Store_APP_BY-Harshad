@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Rating, RoundedStar } from "@smastrom/react-rating";
+import Loader from "@/components/UI/Icons/Loader";
+import AuthHOC from "@/pages/AuthHOC";
 
 const myStyles = {
   itemShapes: RoundedStar,
@@ -9,6 +11,7 @@ const myStyles = {
   inactiveFillColor: "#fbf1a9",
 };
 const Dashboard = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [overallRating, setOverallRating] = useState(0);
   const [usersList, setUsersList] = useState([]);
   const { user } = useSelector((state) => state.userData);
@@ -16,18 +19,24 @@ const Dashboard = () => {
 
   useEffect(() => {
     async function getStoreStats() {
+      setIsLoading(true);
       const result = await axios.post("/api/storeStats", {
         name,
         email,
       });
       setOverallRating(result.data.rating);
       setUsersList(result.data.userList);
+      setIsLoading(false);
     }
     if (email) getStoreStats();
   }, []);
   return (
     <div className="min-h-[inherit] grid grid-cols-1 md:grid-cols-2 border  gap-5 p-7">
-      {/* <div className="min-h-[inherit] border flex flex-col md:flex-row gap-5 justify-center items-center"> */}
+      {isLoading && (
+        <div className="fixed top-0 left-0 bg-black/60 w-screen h-screen z-50 grid place-items-center">
+          <Loader color="white" size="3em" />
+        </div>
+      )}
       <div className="p-5 shadow-xl rounded-lg text-center min-w-80 min-h-80 flex flex-col items-center justify-center">
         <div className="text-3xl">Overall Rating</div>
         <div>
@@ -68,4 +77,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default AuthHOC(Dashboard);

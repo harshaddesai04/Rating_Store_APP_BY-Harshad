@@ -1,4 +1,3 @@
-//unused
 import roles from "@/utils/roles";
 import { MongoClient } from "mongodb";
 const uri = process.env.MONGODB_URI;

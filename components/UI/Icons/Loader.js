@@ -7,11 +7,10 @@ const Loader = ({ size = "2em", color = "black" }) => {
       width={size}
       height={size}
       viewBox="0 0 24 24"
-      color={color}
     >
       <path
         fill="none"
-        stroke="white"
+        stroke={color}
         strokeDasharray={15}
         strokeDashoffset={15}
         strokeLinecap="round"

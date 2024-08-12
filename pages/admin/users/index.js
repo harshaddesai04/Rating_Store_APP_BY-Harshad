@@ -9,6 +9,7 @@ import axios from "axios";
 import toastMsg from "@/utils/DisplayToast";
 import roles from "@/utils/roles";
 import Loader from "@/components/UI/Icons/Loader";
+import AuthHOC from "@/pages/AuthHOC";
 const menu = {
   ADD_USER: "add-user",
   VIEW_USER: "view-user",
@@ -134,9 +135,7 @@ const Users = () => {
       if (message === "error") {
         toastMsg("error", data);
       } else {
-        // dispatch(authActions.saveUserData({ message, ...data }));
         toastMsg("success", "Account created Successfully !!");
-        // router.replace("/");
       }
     }
     for (let i = 0; i < inputs.length; i++) {
@@ -201,7 +200,7 @@ const Users = () => {
           View All Users
         </button>
       </nav>
-      <div className=" w-screen">
+      <div className=" w-full">
         {display == menu.ADD_USER && (
           <div className=" flex justify-center items-center">
             <FormPage>
@@ -326,8 +325,8 @@ const Users = () => {
             </div>
             <div className="overflow-auto">
               {isLoading ? (
-                <div className=" top-0 left-0 bg-black/50 h-20 grid place-items-center">
-                  <Loader size="3em" color="white" />
+                <div className=" h-screen max-h-96 grid place-items-center">
+                  <Loader size="3em" />
                 </div>
               ) : (
                 <table>
@@ -368,4 +367,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default AuthHOC(Users);

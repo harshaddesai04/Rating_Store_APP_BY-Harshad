@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import roles from "@/utils/roles";
+import AuthHOC from "@/pages/AuthHOC";
+import Loader from "@/components/UI/Icons/Loader";
 const StoreDisplay = () => {
   const select = "border rounded-lg p-3";
   const select_container = "flex gap-3 items-center justify-between";
   const [storesList, setStoresList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [filter, setFilter] = useState({
     "arrange-by": "name",
     "sort-by": "ascending",
@@ -13,10 +16,12 @@ const StoreDisplay = () => {
     setFilter((prev) => ({ ...prev, [name]: e.target.value }));
   }
   async function getStoresList() {
+    setIsLoading(true);
     const result = await axios.post("/api/getAllStores", {
       test: "test",
     });
     setStoresList(result.data.storesList);
+    setIsLoading(false);
   }
   useEffect(() => {
     getStoresList();
@@ -62,59 +67,61 @@ const StoreDisplay = () => {
           </select>
         </div>
       </div>
-      <div className="overflow-auto">
-        <table>
-          <thead className="">
-            <tr>
-              <th>#</th>
-              <th>Name</th>
-              <th>Role</th>
-              <th>Address</th>
-              <th>E-mail</th>
-              <th>Store Name</th>
-              <th>Overall Rating</th>
-            </tr>
-          </thead>
-          <tbody>
-            {storesList.length > 0 &&
-              storesList.map((store, index) => {
-                const {
-                  name,
-                  email,
-                  store_name,
-                  overall_rating,
-                  _id,
-                  address,
-                  role,
-                } = store;
+      {isLoading ? (
+        <div className="h-screen max-h-72 grid place-items-center">
+          <Loader size="3em" />
+        </div>
+      ) : (
+        <div className="overflow-auto">
+          <table>
+            <thead className="">
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Role</th>
+                <th>Address</th>
+                <th>E-mail</th>
+                <th>Store Name</th>
+                <th>Overall Rating</th>
+              </tr>
+            </thead>
+            <tbody>
+              {storesList.length > 0 &&
+                storesList.map((store, index) => {
+                  const {
+                    name,
+                    email,
+                    store_name,
+                    overall_rating,
+                    _id,
+                    address,
+                    role,
+                  } = store;
 
-                return (
-                  <tr key={_id}>
-                    <td>{index + 1}</td>
-                    <td>{name}</td>
-                    <td>
-                      {role == roles.ADMIN
-                        ? "System Admin"
-                        : role == roles.STOREOW
-                        ? "Store Owner"
-                        : "Normal User"}
-                    </td>
-                    <td>{address}</td>
-                    <td>{email}</td>
-                    <td>{store_name}</td>
-                    <td>{overall_rating}</td>
-                  </tr>
-                );
-              })}
-          </tbody>
-        </table>
-      </div>
-      {/* {storesList.map((store) => {
-        const { name, email, store_name, overall_rating } = store;
-        return <div>{name}</div>;
-      })} */}
+                  return (
+                    <tr key={_id}>
+                      <td>{index + 1}</td>
+                      <td>{name}</td>
+                      <td>
+                        {role == roles.ADMIN
+                          ? "System Admin"
+                          : role == roles.STOREOW
+                          ? "Store Owner"
+                          : "Normal User"}
+                      </td>
+                      <td>{address}</td>
+                      <td>{email}</td>
+                      <td>{store_name}</td>
+                      <td>{overall_rating}</td>
+                    </tr>
+                  );
+                })}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 };
 
-export default StoreDisplay;
+export default AuthHOC(StoreDisplay);

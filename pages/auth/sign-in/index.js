@@ -21,15 +21,15 @@ const SignIn = () => {
     email: "",
     password: "",
   });
-  if (name) {
-    router.replace(
-      role == roles.ADMIN
-        ? "/admin/dashboard"
-        : role == roles.USER
-        ? "/user/dashboard"
-        : "/store-owner/dashboard"
-    );
-  }
+  // if (name) {
+  //   router.replace(
+  //     role == roles.ADMIN
+  //       ? "/admin/dashboard"
+  //       : role == roles.USER
+  //       ? "/user/dashboard"
+  //       : "/store-owner/dashboard"
+  //   );
+  // }
   const [emailerror, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
@@ -72,15 +72,13 @@ const SignIn = () => {
       } else {
         dispatch(userDataActions.saveUserData({ ...userData, ...data }));
         toastMsg("success", "Sign In Success !!");
-        if (role) {
-          router.replace(
-            role == roles.ADMIN
-              ? "/admin/dashboard"
-              : role == roles.USER
-              ? "/user/dashboard"
-              : "/store-owner/dashboard"
-          );
-        }
+        router.push(
+          userData.role == roles.ADMIN
+            ? "/admin/dashboard"
+            : userData.role == roles.USER
+            ? "/user/dashboard"
+            : "/store-owner/dashboard"
+        );
       }
     } catch (error) {
       //console.log("error in sign in:", error);

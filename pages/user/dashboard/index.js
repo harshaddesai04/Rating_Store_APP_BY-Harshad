@@ -6,7 +6,7 @@ import { Rating, RoundedStar } from "@smastrom/react-rating";
 import Popup from "./Popup";
 import Loader from "@/components/UI/Icons/Loader";
 import Input from "@/components/UI/FormComponents/Input/Input";
-
+import AuthHOC from "@/pages/AuthHOC";
 const myStyles = {
   itemShapes: RoundedStar,
   activeFillColor: "#ffb700",
@@ -125,4 +125,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default AuthHOC(Dashboard);
