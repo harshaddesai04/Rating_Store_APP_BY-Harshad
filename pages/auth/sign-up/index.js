@@ -9,6 +9,7 @@ import axios from "axios";
 import toastMsg from "@/utils/DisplayToast";
 import roles from "@/utils/roles";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 function passwordValidation(value, setPasswordError, setIsValid) {
   if (value.length < 8) {
@@ -56,7 +57,7 @@ const SignUp = () => {
 
   function changeHandler(event, name) {
     const value = event.target.value;
-    if (name == "password") setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   }
 
   function validation(e) {
@@ -132,56 +133,59 @@ const SignUp = () => {
   }
 
   return (
-    <div className="border min-h-[inherit] flex justify-center items-center">
-      <FormPage>
-        <FormMessage
-          header="Create a new account"
-          subtext="Or"
-          routetext="login to your existing account"
-          route="/auth/sign-in"
-        />
-        <Form submitFunction={validation}>
-          <InputContainer>
-            <Input
-              id="signup-name"
-              label="Name"
-              type="text"
-              errorMessage={nameError}
-              value={formData.name}
-              onChange={(e) => changeHandler(e, "name")}
-            />
-            <Input
-              id="signup-email"
-              label="Email Address"
-              type="text"
-              errorMessage={emailerror}
-              value={formData.email}
-              onChange={(e) => changeHandler(e, "email")}
-            />
-            <Input
-              id="signup-password"
-              label="Password"
-              type="password"
-              errorMessage={passwordError}
-              value={formData.password}
-              onChange={(e) => changeHandler(e, "password")}
-            />
-
-            <Input
-              label="Address"
-              name={"signup-address"}
-              className={`w-full px-3 py-2 border  border-gray-300  rounded-md shadow-sm placeholder-gray-400 sm:text-sm focus: outline-none h-[120px] resize-none`}
-              id={"signup-address"}
-              value={formData.address}
-              onChange={(e) => changeHandler(e, "address")}
-              as="textarea"
-              errorMessage={addressError}
-            />
-          </InputContainer>
-          <FormButton type="submit" label="Sign Up" />
-        </Form>
-      </FormPage>
-    </div>
+    <>
+      <Head>
+        <title>Sign Up</title>
+      </Head>
+      <div className="border min-h-[inherit] flex justify-center items-center">
+        <FormPage>
+          <FormMessage
+            header="Create a new account"
+            subtext="Or"
+            routetext="login to your existing account"
+            route="/auth/sign-in"
+          />
+          <Form submitFunction={validation}>
+            <InputContainer>
+              <Input
+                id="signup-name"
+                label="Name"
+                type="text"
+                errorMessage={nameError}
+                value={formData.name}
+                onChange={(e) => changeHandler(e, "name")}
+              />
+              <Input
+                id="signup-email"
+                label="Email Address"
+                type="text"
+                errorMessage={emailerror}
+                value={formData.email}
+                onChange={(e) => changeHandler(e, "email")}
+              />
+              <Input
+                id="signup-password"
+                label="Password"
+                type="password"
+                errorMessage={passwordError}
+                value={formData.password}
+                onChange={(e) => changeHandler(e, "password")}
+              />
+              <Input
+                label="Address"
+                name={"signup-address"}
+                id={"signup-address"}
+                value={formData.address}
+                onChange={(e) => changeHandler(e, "address")}
+                as="textarea"
+                errorMessage={addressError}
+              />
+            </InputContainer>
+            <FormButton type="submit" label="Sign Up" />
+          </Form>
+        </FormPage>
+      </div>
+    </>
   );
 };
 

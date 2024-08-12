@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { userDataActions } from "@/redux-store/userDataSlice";
 import { useRouter } from "next/router";
 import roles from "@/utils/roles";
+import Head from "next/head";
 const SignIn = () => {
   const { user } = useSelector((state) => state.userData);
   const { name, role } = user;
@@ -21,15 +22,15 @@ const SignIn = () => {
     email: "",
     password: "",
   });
-  // if (name) {
-  //   router.replace(
-  //     role == roles.ADMIN
-  //       ? "/admin/dashboard"
-  //       : role == roles.USER
-  //       ? "/user/dashboard"
-  //       : "/store-owner/dashboard"
-  //   );
-  // }
+  if (name) {
+    router.replace(
+      role == roles.ADMIN
+        ? "/admin/dashboard"
+        : role == roles.USER
+        ? "/user/dashboard"
+        : "/store-owner/dashboard"
+    );
+  }
   const [emailerror, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
@@ -88,37 +89,42 @@ const SignIn = () => {
     }
   }
   return (
-    <div className="min-h-[inherit] flex justify-center items-center">
-      <FormPage>
-        <FormMessage
-          header="Sign in to your account"
-          subtext="Or"
-          routetext="register a new account"
-          route="/auth/sign-up"
-        />
-        <Form submitFunction={validation}>
-          <InputContainer>
-            <Input
-              id="signin-email"
-              label="Email Address"
-              type="text"
-              errorMessage={emailerror}
-              value={formData.email}
-              onChange={(e) => changeHandler(e, "email")}
-            />
-            <Input
-              id="signin-password"
-              label="Password"
-              type="password"
-              errorMessage={passwordError}
-              value={formData.password}
-              onChange={(e) => changeHandler(e, "password")}
-            />
-          </InputContainer>
-          <FormButton type="submit" label="Sign In" />
-        </Form>
-      </FormPage>
-    </div>
+    <>
+      <Head>
+        <title>Sign In</title>
+      </Head>
+      <div className="min-h-[inherit] flex justify-center items-center">
+        <FormPage>
+          <FormMessage
+            header="Sign in to your account"
+            subtext="Or"
+            routetext="register a new account"
+            route="/auth/sign-up"
+          />
+          <Form submitFunction={validation}>
+            <InputContainer>
+              <Input
+                id="signin-email"
+                label="Email Address"
+                type="text"
+                errorMessage={emailerror}
+                value={formData.email}
+                onChange={(e) => changeHandler(e, "email")}
+              />
+              <Input
+                id="signin-password"
+                label="Password"
+                type="password"
+                errorMessage={passwordError}
+                value={formData.password}
+                onChange={(e) => changeHandler(e, "password")}
+              />
+            </InputContainer>
+            <FormButton type="submit" label="Sign In" />
+          </Form>
+        </FormPage>
+      </div>
+    </>
   );
 };
 

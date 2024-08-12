@@ -24,6 +24,11 @@ const Header = () => {
       <nav className="navigation flex gap-5">
         {pathname != "/auth/sign-in" && pathname != "/auth/sign-up" && (
           <Link
+            className={`border-b-2 ${
+              pathname.includes("dashboard")
+                ? "border-black"
+                : "border-transparent"
+            } `}
             href={
               role == roles.ADMIN
                 ? "/admin/dashboard"
@@ -37,12 +42,39 @@ const Header = () => {
         )}
         {role === roles.ADMIN && (
           <>
-            <Link href="/admin/users">Users</Link>
-            <Link href="/admin/store">Store</Link>
+            <Link
+              className={`border-b-2 ${
+                pathname.includes("/admin/users")
+                  ? "border-black"
+                  : "border-transparent"
+              } `}
+              href="/admin/users"
+            >
+              Users
+            </Link>
+            <Link
+              className={`border-b-2 ${
+                pathname.includes("/admin/store")
+                  ? "border-black"
+                  : "border-transparent"
+              } `}
+              href="/admin/store"
+            >
+              Store
+            </Link>
           </>
         )}
         {pathname != "/auth/sign-in" && pathname != "/auth/sign-up" && (
-          <Link href={"/auth/account"}>Account</Link>
+          <Link
+            className={`border-b-2 ${
+              pathname.includes("/auth/account")
+                ? "border-black"
+                : "border-transparent"
+            } `}
+            href={"/auth/account"}
+          >
+            Account
+          </Link>
         )}
       </nav>
     </header>
