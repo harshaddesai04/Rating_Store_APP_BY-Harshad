@@ -32,6 +32,15 @@ This project was done according to the requirements in the challenge given in th
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+## MERN Stack
+
+<!-- [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
+
+Front end: [Github](https://github.com/RajathRao2000/store-rating-app-frontend)
+Backend: [Github](https://github.com/RajathRao2000/backend_store-rating-app)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ### Built With
 
 - [![Next][Next.js]][Next-url]
