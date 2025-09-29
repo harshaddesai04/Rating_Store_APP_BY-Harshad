@@ -10,7 +10,7 @@ export default function Home() {
       <p>address:{address}</p> */}
     </main>
   );
-}
+}/* {} */
 /*
 Admin:
 admin@a.com
