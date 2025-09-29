@@ -12,3 +12,4 @@ export default function toastMsg(status, message, settings) {
         }
   );
 }
+/* {} */
