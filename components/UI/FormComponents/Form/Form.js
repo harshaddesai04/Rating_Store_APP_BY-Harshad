@@ -1,4 +1,4 @@
-import React from "react";
+/* {} */import React from "react";
 
 const Form = (props) => {
   const { submitFunction } = props;
@@ -15,3 +15,4 @@ const Form = (props) => {
 };
 
 export default Form;
+/* {} */
