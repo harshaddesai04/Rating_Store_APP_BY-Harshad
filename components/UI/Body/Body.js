@@ -5,3 +5,4 @@ const Body = ({ children }) => {
 };
 
 export default Body;
+/* {} */
